@@ -9,11 +9,10 @@ Gem::Specification.new do |spec|
   spec.email = ["loran@codedivision.nl"]
 
   spec.summary = "Kredis plugin for querying keys"
-  spec.description = spec.summary 
+  spec.description = spec.summary
   spec.homepage = "https://github.com/LoranKloeze/kredis-query"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.7.0"
-
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
@@ -35,4 +34,5 @@ Gem::Specification.new do |spec|
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
+  spec.metadata["rubygems_mfa_required"] = "true"
 end
