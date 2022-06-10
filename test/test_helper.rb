@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "bundler/setup"
 require "active_support/test_case"
 require "active_support/testing/autorun"
@@ -7,11 +9,16 @@ require "pry"
 require "kredis"
 require "kredis/query"
 
-Kredis.configurator = Class.new { def config_for(name) { db: "1" } end }.new
+Kredis.configurator = Class.new do
+  def config_for(_name)
+    { db: "1" }
+  end
+end.new
 
-ActiveSupport::LogSubscriber.logger = ActiveSupport::Logger.new(STDOUT) if ENV["VERBOSE"]
+ActiveSupport::LogSubscriber.logger = ActiveSupport::Logger.new($stdout) if ENV["VERBOSE"]
 
-class ActiveSupport::TestCase
-  teardown { Kredis.clear_all }
-
+module ActiveSupport
+  class TestCase
+    teardown { Kredis.clear_all }
+  end
 end
