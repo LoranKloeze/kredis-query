@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Based on https://github.com/rails/kredis/blob/f164b42e6b958f98e92c2f811a3a283e6ed0e261/bin/release
+
+VERSION=$1
+
+printf "module Kredis\n  module Query\n    VERSION = \"$VERSION\"\n  end\nend\n" > ./lib/kredis/query/version.rb
+bundle
+git add Gemfile.lock lib/kredis/query/version.rb
+git commit -m "Bump version for $VERSION"
+git push
+git tag v$VERSION
+git push --tags
+gem build kredis-query.gemspec
+gem push "kredis-query-$VERSION.gem" --host https://rubygems.org
+rm "kredis-query-$VERSION.gem"
