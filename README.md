@@ -1,5 +1,5 @@
 # Kredis Query 🔍🔎
-A plugin for Kredis that adds querying functionality.
+A plugin for [Kredis](https://github.com/rails/kredis) that adds querying functionality.
 
 ## Installation
 Make sure you have a `gem "kredis"` entry in your Gemfile.
