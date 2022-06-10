@@ -6,6 +6,8 @@ source "https://rubygems.org"
 gemspec
 
 gem "rake", "~> 13.0"
+gem "kredis","~> 1.0.0"
+gem "pry"
 
 gem "minitest", "~> 5.0"
 

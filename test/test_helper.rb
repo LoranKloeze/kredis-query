@@ -1,6 +1,17 @@
-# frozen_string_literal: true
+require "bundler/setup"
+require "active_support/test_case"
+require "active_support/testing/autorun"
+require "minitest/mock"
+require "pry"
 
-$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
+require "kredis"
 require "kredis/query"
 
-require "minitest/autorun"
+Kredis.configurator = Class.new { def config_for(name) { db: "1" } end }.new
+
+ActiveSupport::LogSubscriber.logger = ActiveSupport::Logger.new(STDOUT) if ENV["VERBOSE"]
+
+class ActiveSupport::TestCase
+  teardown { Kredis.clear_all }
+
+end
