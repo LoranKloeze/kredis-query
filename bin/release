@@ -3,7 +3,7 @@
 
 VERSION=$1
 
-printf "module Kredis\n  module Query\n    VERSION = \"$VERSION\"\n  end\nend\n" > ./lib/kredis/query/version.rb
+printf "# frozen_string_literal: true\n\nmodule Kredis\n  module Query\n    VERSION = \"$VERSION\"\n  end\nend\n" > ./lib/kredis/query/version.rb
 bundle
 git add Gemfile.lock lib/kredis/query/version.rb
 git commit -m "Bump version for $VERSION"
