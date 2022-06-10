@@ -2,6 +2,22 @@
 name: CI
 on: [push, pull_request]
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    name: Linter - Rubocop
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+          bundler-cache: true
+          
+      - name: Run Rubocop
+        run: bundle exec rubocop -P
+
   tests:
     runs-on: ubuntu-latest
     strategy:
@@ -24,8 +40,6 @@ jobs:
         uses: supercharge/redis-github-action@1.2.0
         with:
           redis-version: ${{ matrix.redis_server }}
-      - name: Run Rubocop
-        run: bundle exec rubocop -P
 
       - name: Run tests
         run: bin/test
